@@ -94,3 +94,14 @@ extension UIView {
                bottom: superviewBottomAnchor, right: superviewTrailingAnchor)
     }
 }
+
+
+extension UIViewController {
+    func configureGradientBackground() {
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.systemPurple.cgColor, UIColor.systemBlue.cgColor]
+        gradient.locations = [0 ,1]
+        view.layer.addSublayer(gradient)
+        gradient.frame = view.frame
+    }
+}

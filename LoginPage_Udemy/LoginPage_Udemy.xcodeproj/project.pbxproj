@@ -10,22 +10,36 @@
 		4225BE6924872D8C00F4C11D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4225BE6824872D8C00F4C11D /* Extensions.swift */; };
 		4225BE6B24873C0300F4C11D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4225BE6A24873C0300F4C11D /* CustomTextField.swift */; };
 		4225BE6D24873F6400F4C11D /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4225BE6C24873F6400F4C11D /* AuthButton.swift */; };
+		4225BE6F248783A100F4C11D /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4225BE6E248783A100F4C11D /* DividerView.swift */; };
+		4225BE7124878DB500F4C11D /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4225BE7024878DB500F4C11D /* RegistrationController.swift */; };
+		4225BE732487991900F4C11D /* ResetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4225BE722487991900F4C11D /* ResetPasswordController.swift */; };
+		4225BE752487A7D300F4C11D /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4225BE742487A7D300F4C11D /* AuthenticationViewModel.swift */; };
+		4225BE772487BED300F4C11D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4225BE762487BED300F4C11D /* GoogleService-Info.plist */; };
 		42D5013B24871583003CC770 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D5013A24871583003CC770 /* AppDelegate.swift */; };
 		42D5014424871588003CC770 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42D5014324871588003CC770 /* Assets.xcassets */; };
 		42D5014724871588003CC770 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D5014524871588003CC770 /* LaunchScreen.storyboard */; };
 		42D5014F2487176C003CC770 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D5014E2487176C003CC770 /* LoginController.swift */; };
+		EA1DDD6615C8E21DF0A9B484 /* Pods_LoginPage_Udemy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A860E55B7EBF77CC7BD0E5D7 /* Pods_LoginPage_Udemy.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D799951DA5D3DB4B547FF35 /* Pods-LoginPage_Udemy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoginPage_Udemy.debug.xcconfig"; path = "Target Support Files/Pods-LoginPage_Udemy/Pods-LoginPage_Udemy.debug.xcconfig"; sourceTree = "<group>"; };
 		4225BE6824872D8C00F4C11D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4225BE6A24873C0300F4C11D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		4225BE6C24873F6400F4C11D /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
+		4225BE6E248783A100F4C11D /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
+		4225BE7024878DB500F4C11D /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		4225BE722487991900F4C11D /* ResetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordController.swift; sourceTree = "<group>"; };
+		4225BE742487A7D300F4C11D /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		4225BE762487BED300F4C11D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		42D5013724871583003CC770 /* LoginPage_Udemy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginPage_Udemy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D5013A24871583003CC770 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42D5014324871588003CC770 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42D5014624871588003CC770 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42D5014824871588003CC770 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42D5014E2487176C003CC770 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		9704BA660EEF869B7177DA58 /* Pods-LoginPage_Udemy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoginPage_Udemy.release.xcconfig"; path = "Target Support Files/Pods-LoginPage_Udemy/Pods-LoginPage_Udemy.release.xcconfig"; sourceTree = "<group>"; };
+		A860E55B7EBF77CC7BD0E5D7 /* Pods_LoginPage_Udemy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LoginPage_Udemy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA1DDD6615C8E21DF0A9B484 /* Pods_LoginPage_Udemy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +59,8 @@
 			children = (
 				42D5013924871583003CC770 /* LoginPage_Udemy */,
 				42D5013824871583003CC770 /* Products */,
+				F1D997F80F6BAF1E5EBF18A0 /* Pods */,
+				E8ECE9D73E3E0A71B0CCF8C6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +84,7 @@
 				42D501552487185C003CC770 /* API */,
 				42D5014324871588003CC770 /* Assets.xcassets */,
 				42D5014524871588003CC770 /* LaunchScreen.storyboard */,
+				4225BE762487BED300F4C11D /* GoogleService-Info.plist */,
 				42D5014824871588003CC770 /* Info.plist */,
 			);
 			path = LoginPage_Udemy;
@@ -92,6 +110,7 @@
 			children = (
 				4225BE6A24873C0300F4C11D /* CustomTextField.swift */,
 				4225BE6C24873F6400F4C11D /* AuthButton.swift */,
+				4225BE6E248783A100F4C11D /* DividerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -99,6 +118,7 @@
 		42D5015324871837003CC770 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				4225BE742487A7D300F4C11D /* AuthenticationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -107,6 +127,8 @@
 			isa = PBXGroup;
 			children = (
 				42D5014E2487176C003CC770 /* LoginController.swift */,
+				4225BE7024878DB500F4C11D /* RegistrationController.swift */,
+				4225BE722487991900F4C11D /* ResetPasswordController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -118,6 +140,24 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		E8ECE9D73E3E0A71B0CCF8C6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A860E55B7EBF77CC7BD0E5D7 /* Pods_LoginPage_Udemy.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F1D997F80F6BAF1E5EBF18A0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1D799951DA5D3DB4B547FF35 /* Pods-LoginPage_Udemy.debug.xcconfig */,
+				9704BA660EEF869B7177DA58 /* Pods-LoginPage_Udemy.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -125,9 +165,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42D5014B24871588003CC770 /* Build configuration list for PBXNativeTarget "LoginPage_Udemy" */;
 			buildPhases = (
+				3A6FA76EF2E0EA88D2FEED2C /* [CP] Check Pods Manifest.lock */,
 				42D5013324871583003CC770 /* Sources */,
 				42D5013424871583003CC770 /* Frameworks */,
 				42D5013524871583003CC770 /* Resources */,
+				5C6C49F9045ADF9C6CF14761 /* [CP] Embed Pods Frameworks */,
+				99FF171A30409887F9A80195 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -178,20 +221,84 @@
 			files = (
 				42D5014724871588003CC770 /* LaunchScreen.storyboard in Resources */,
 				42D5014424871588003CC770 /* Assets.xcassets in Resources */,
+				4225BE772487BED300F4C11D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3A6FA76EF2E0EA88D2FEED2C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LoginPage_Udemy-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5C6C49F9045ADF9C6CF14761 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LoginPage_Udemy/Pods-LoginPage_Udemy-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LoginPage_Udemy/Pods-LoginPage_Udemy-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LoginPage_Udemy/Pods-LoginPage_Udemy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		99FF171A30409887F9A80195 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LoginPage_Udemy/Pods-LoginPage_Udemy-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LoginPage_Udemy/Pods-LoginPage_Udemy-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LoginPage_Udemy/Pods-LoginPage_Udemy-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		42D5013324871583003CC770 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4225BE7124878DB500F4C11D /* RegistrationController.swift in Sources */,
 				4225BE6B24873C0300F4C11D /* CustomTextField.swift in Sources */,
+				4225BE732487991900F4C11D /* ResetPasswordController.swift in Sources */,
 				4225BE6D24873F6400F4C11D /* AuthButton.swift in Sources */,
 				42D5013B24871583003CC770 /* AppDelegate.swift in Sources */,
 				4225BE6924872D8C00F4C11D /* Extensions.swift in Sources */,
+				4225BE752487A7D300F4C11D /* AuthenticationViewModel.swift in Sources */,
+				4225BE6F248783A100F4C11D /* DividerView.swift in Sources */,
 				42D5014F2487176C003CC770 /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,6 +433,7 @@
 		};
 		42D5014C24871588003CC770 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D799951DA5D3DB4B547FF35 /* Pods-LoginPage_Udemy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -335,7 +443,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TeamSloth.LoginPage-Udemy";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.KasRoid;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -344,6 +452,7 @@
 		};
 		42D5014D24871588003CC770 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9704BA660EEF869B7177DA58 /* Pods-LoginPage_Udemy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -353,7 +462,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TeamSloth.LoginPage-Udemy";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.KasRoid;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
