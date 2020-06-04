@@ -54,8 +54,8 @@ class RegistrationController: UIViewController {
     // MARK: - Selectors
     @objc func handleSignUp() {
         guard let email = emailTextField.text else { return }
-        guard let password = emailTextField.text else { return }
-        guard let fullname = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        guard let fullname = fullnameTextField.text else { return }
         
         // Firebase Authenticator
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in

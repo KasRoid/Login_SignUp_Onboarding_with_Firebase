@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,9 @@
 		4225BE732487991900F4C11D /* ResetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4225BE722487991900F4C11D /* ResetPasswordController.swift */; };
 		4225BE752487A7D300F4C11D /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4225BE742487A7D300F4C11D /* AuthenticationViewModel.swift */; };
 		4225BE772487BED300F4C11D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4225BE762487BED300F4C11D /* GoogleService-Info.plist */; };
+		4225BE792487D9A000F4C11D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4225BE782487D9A000F4C11D /* HomeViewController.swift */; };
+		4225BE7B24888AED00F4C11D /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4225BE7A24888AED00F4C11D /* Cards.swift */; };
+		4225BE7D24888DAC00F4C11D /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4225BE7C24888DAC00F4C11D /* Board.swift */; };
 		42D5013B24871583003CC770 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D5013A24871583003CC770 /* AppDelegate.swift */; };
 		42D5014424871588003CC770 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42D5014324871588003CC770 /* Assets.xcassets */; };
 		42D5014724871588003CC770 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D5014524871588003CC770 /* LaunchScreen.storyboard */; };
@@ -32,6 +35,9 @@
 		4225BE722487991900F4C11D /* ResetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordController.swift; sourceTree = "<group>"; };
 		4225BE742487A7D300F4C11D /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		4225BE762487BED300F4C11D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		4225BE782487D9A000F4C11D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		4225BE7A24888AED00F4C11D /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
+		4225BE7C24888DAC00F4C11D /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		42D5013724871583003CC770 /* LoginPage_Udemy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginPage_Udemy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D5013A24871583003CC770 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42D5014324871588003CC770 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -111,6 +117,8 @@
 				4225BE6A24873C0300F4C11D /* CustomTextField.swift */,
 				4225BE6C24873F6400F4C11D /* AuthButton.swift */,
 				4225BE6E248783A100F4C11D /* DividerView.swift */,
+				4225BE7C24888DAC00F4C11D /* Board.swift */,
+				4225BE7A24888AED00F4C11D /* Cards.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -129,6 +137,7 @@
 				42D5014E2487176C003CC770 /* LoginController.swift */,
 				4225BE7024878DB500F4C11D /* RegistrationController.swift */,
 				4225BE722487991900F4C11D /* ResetPasswordController.swift */,
+				4225BE782487D9A000F4C11D /* HomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -154,7 +163,6 @@
 				1D799951DA5D3DB4B547FF35 /* Pods-LoginPage_Udemy.debug.xcconfig */,
 				9704BA660EEF869B7177DA58 /* Pods-LoginPage_Udemy.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -293,9 +301,12 @@
 			files = (
 				4225BE7124878DB500F4C11D /* RegistrationController.swift in Sources */,
 				4225BE6B24873C0300F4C11D /* CustomTextField.swift in Sources */,
+				4225BE7D24888DAC00F4C11D /* Board.swift in Sources */,
 				4225BE732487991900F4C11D /* ResetPasswordController.swift in Sources */,
 				4225BE6D24873F6400F4C11D /* AuthButton.swift in Sources */,
 				42D5013B24871583003CC770 /* AppDelegate.swift in Sources */,
+				4225BE7B24888AED00F4C11D /* Cards.swift in Sources */,
+				4225BE792487D9A000F4C11D /* HomeViewController.swift in Sources */,
 				4225BE6924872D8C00F4C11D /* Extensions.swift in Sources */,
 				4225BE752487A7D300F4C11D /* AuthenticationViewModel.swift in Sources */,
 				4225BE6F248783A100F4C11D /* DividerView.swift in Sources */,
