@@ -14,6 +14,7 @@ final class Board: UIView {
     let numberOfCards = 16
     let cardImages: [String] = ["😍", "🐸", "🍎", "⚽️", "🍔", "🍟", "👻", "💋"]
     lazy var pairOfCardImages = cardImages + cardImages
+    let maxTry = 30
     var userTried = 0
     var arrayOfCards: [Cards] = []
     var cardNumber = 0
@@ -24,6 +25,13 @@ final class Board: UIView {
     var flippedCardCounter = 0
     var buttonTag = 0
     var flippedCard: [Int] = []
+    var resetButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Reset", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        return button
+    }()
     let firstLineStack = UIStackView()
     let secondLineStack = UIStackView()
     let thirdLineStack = UIStackView()
@@ -45,6 +53,31 @@ final class Board: UIView {
         guard let cardImage = pairOfCardImages.randomElement() else { return }
         pairOfCardImages.remove(at: pairOfCardImages.firstIndex(of: cardImage)!)
         currentImage = cardImage
+    }
+    
+    // 카드를 생성하여 array 에 할당
+    func generateCards() {
+        for _ in 1...numberOfCards / 2 {
+            for _ in 1...2 {
+                generateCardImage()
+                let pairOfCards = Cards()
+                pairOfCards.addTarget(self, action: #selector(cardPressed(_:)), for: .touchUpInside)
+                pairOfCards.label.text = currentImage
+                pairOfCards.tag = buttonTag
+                buttonTag += 1
+                cardIsNotFlipped(card: pairOfCards)
+                arrayOfCards.append(pairOfCards)
+            }
+        }
+    }
+    
+    func setupStackView() {
+        for stack in arrayOfHorizontalStacks {
+            for _ in 1...numberOfCards / arrayOfHorizontalStacks.count {
+                stack.addArrangedSubview(arrayOfCards[cardNumber])
+                cardNumber += 1
+            }
+        }
     }
     
     func cardIsFlipped(card: Cards) {
@@ -76,6 +109,14 @@ final class Board: UIView {
     
     func removeCards(_ card: Cards) {
         card.alpha = 0
+    }
+    
+    func removeSubviews() {
+        for stack in arrayOfHorizontalStacks {
+            for view in stack.subviews {
+                stack.removeArrangedSubview(view)
+            }
+        }
     }
     
     func checkAnswer() {
@@ -118,7 +159,7 @@ final class Board: UIView {
     }
     
     
-    // MARK: Button Action
+    // MARK: Button Actions
     @objc func cardPressed(_ sender: Cards) {
         guard flippedCardCounter < 2 else { print("Guard Activated"); return }
         if sender.isFlipped == false { // 카드가 뒤집어져있으면...
@@ -126,14 +167,38 @@ final class Board: UIView {
             flippedCardCounter += 1
         }
         print(flippedCard)
-        checkAnswer()
         if flippedCardCounter == 2 {
             userTried += 1
+            HomeViewController.score.text = "\(userTried) / \(maxTry)"
             print("UserTried \(userTried) times")
+        }
+        checkAnswer()
+        if flippedCardCounter == 2 {
             resetMemory()
         }
     }
     
+    @objc func resetGame(_ sender: UIButton) {
+        print("ResetButton Pressed")
+        arrayOfCards.removeAll()
+        pairOfCardImages = cardImages + cardImages
+        cardNumber = 0
+        stackCounter = 0
+        currentImage = ""
+        imageOfFirstCard = ""
+        imageOFSecondCard = ""
+        flippedCardCounter = 0
+        buttonTag = 0
+        removeSubviews()
+        print("Number of Subviews in Stack \(firstLineStack.subviews.count)")
+        generateCards()
+        setupStackView()
+        for card in arrayOfCards {
+            card.alpha = 1
+        }
+        userTried = 0
+        HomeViewController.score.text = "\(userTried) / \(maxTry)"
+    }
     
     // MARK: - Design
     override func layoutSubviews() {
@@ -147,31 +212,13 @@ final class Board: UIView {
             $0.spacing = 15
         }
         
-        // 카드를 생성해서 array 에 할당
-        for _ in 1...numberOfCards / 2 {
-            for _ in 1...2 {
-                generateCardImage()
-                let pairOfCards = Cards()
-                pairOfCards.addTarget(self, action: #selector(cardPressed(_:)), for: .touchUpInside)
-                pairOfCards.label.text = currentImage
-                pairOfCards.tag = buttonTag
-                buttonTag += 1
-                cardIsNotFlipped(card: pairOfCards)
-                arrayOfCards.append(pairOfCards)
-            }
-        }
-        
-        // 생성된 카드를 각 스택뷰에 할당
-        for stack in arrayOfHorizontalStacks {
-            for _ in 1...numberOfCards / arrayOfHorizontalStacks.count {
-                stack.addArrangedSubview(arrayOfCards[cardNumber])
-                cardNumber += 1
-            }
-        }
+        generateCards()
+        setupStackView()
+        resetButton.addTarget(self, action: #selector(resetGame(_:)), for: .touchUpInside)
         
         
         // MARK: - AutoLayout
-        let finalStack = UIStackView(arrangedSubviews: [firstLineStack, secondLineStack, thirdLineStack, fourthLineStack])
+        let finalStack = UIStackView(arrangedSubviews: [firstLineStack, secondLineStack, thirdLineStack, fourthLineStack, resetButton])
         finalStack.axis = .vertical
         finalStack.alignment = .fill
         finalStack.distribution = .fillEqually

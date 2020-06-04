@@ -13,6 +13,17 @@ class HomeViewController: UIViewController {
     
     // MARK: - Properties
     private var gameBoard = Board()
+    static var score: UILabel = {
+        let label = UILabel()
+        label.text = "0 / 30"
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.textColor = .white
+        label.sizeToFit()
+        return label
+    }()
+    
+    
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -72,15 +83,25 @@ class HomeViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleLogout))
         navigationItem.leftBarButtonItem?.tintColor = .white
         
-        view.addSubview(gameBoard)
-        gameBoard.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        // 여기서부터 복사
+        [gameBoard, HomeViewController.score].forEach { view.addSubview($0) }
+        [gameBoard, HomeViewController.score].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             gameBoard.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 40),
             gameBoard.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 35),
             gameBoard.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -35),
-            gameBoard.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -70)
+            gameBoard.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 0),
+            
+//            score.topAnchor.constraint(equalTo: view.topAnchor, constant: 99),
+            HomeViewController.score.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: -(HomeViewController.score.frame.height * 1.4)),
+            HomeViewController.score.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -30),
         ])
     }
+    
+    @objc func resetButtonPressed(_ sender: UIButton) {
+        
+    }
 }
-
