@@ -14,7 +14,9 @@ final class Board: UIView {
     let numberOfCards = 16
     let cardImages: [String] = ["😍", "🐸", "🍎", "⚽️", "🍔", "🍟", "👻", "💋"]
     lazy var pairOfCardImages = cardImages + cardImages
-    let maxTry = 30
+    let sizeConfiguration = UIImage.SymbolConfiguration(scale: .large)
+    lazy var cardLogo = UIImage(systemName: "tornado", withConfiguration: sizeConfiguration)
+    static let maxTry = 30
     var userTried = 0
     var arrayOfCards: [Cards] = []
     var cardNumber = 0
@@ -63,6 +65,7 @@ final class Board: UIView {
                 let pairOfCards = Cards()
                 pairOfCards.addTarget(self, action: #selector(cardPressed(_:)), for: .touchUpInside)
                 pairOfCards.label.text = currentImage
+                pairOfCards.logoIamgeView.image = cardLogo
                 pairOfCards.tag = buttonTag
                 buttonTag += 1
                 cardIsNotFlipped(card: pairOfCards)
@@ -81,7 +84,13 @@ final class Board: UIView {
     }
     
     func cardIsFlipped(card: Cards) {
+        UIView.transition(with: card,
+                          duration: 0.4,
+                          options: .transitionFlipFromRight,
+                          animations: nil,
+                          completion: nil)
         card.label.alpha = 1
+        card.logoIamgeView.alpha = 0
         card.backgroundColor = .white
         card.isFlipped = true // 카드의 뒤집힘 상태를 true 로 변경
         flippedCard.append(card.tag) // 뒤집힌 카드를 기억하기 위한 버튼 태그 저장
@@ -97,7 +106,13 @@ final class Board: UIView {
     }
     
     func cardIsNotFlipped(card: Cards) {
+        UIView.transition(with: card,
+                          duration: 0.4,
+                          options: .transitionFlipFromLeft,
+                          animations: nil,
+                          completion: nil)
         card.label.alpha = 0
+        card.logoIamgeView.alpha = 1
         card.backgroundColor = .orange
         card.isFlipped = false
     }
@@ -117,6 +132,37 @@ final class Board: UIView {
                 stack.removeArrangedSubview(view)
             }
         }
+    }
+    
+    func gameOver() {
+        print("ResetButton Pressed")
+        arrayOfCards.removeAll()
+        pairOfCardImages = cardImages + cardImages
+        cardNumber = 0
+        stackCounter = 0
+        currentImage = ""
+        imageOfFirstCard = ""
+        imageOFSecondCard = ""
+        flippedCardCounter = 0
+        buttonTag = 0
+        removeSubviews()
+        print("Number of Subviews in Stack \(firstLineStack.subviews.count)")
+        generateCards()
+        setupStackView()
+        for card in arrayOfCards {
+            card.alpha = 1
+        }
+        userTried = 0
+        HomeViewController.score.text = "\(userTried) / \(Board.maxTry)"
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: "게임오버", message: "다음에는 성공할 수 있을거에요!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(
+            title: "확인",
+            style: .cancel))
+        let VC = HomeViewController()
+        VC.present(alert, animated: true, completion: { print("Alert Alert Alert") })
     }
     
     func checkAnswer() {
@@ -169,7 +215,11 @@ final class Board: UIView {
         print(flippedCard)
         if flippedCardCounter == 2 {
             userTried += 1
-            HomeViewController.score.text = "\(userTried) / \(maxTry)"
+            HomeViewController.score.text = "\(userTried) / \(Board.maxTry)"
+            if userTried == Board.maxTry {
+                showAlert()
+                print("CONDITION: Game Over")
+            }
             print("UserTried \(userTried) times")
         }
         checkAnswer()
@@ -197,7 +247,7 @@ final class Board: UIView {
             card.alpha = 1
         }
         userTried = 0
-        HomeViewController.score.text = "\(userTried) / \(maxTry)"
+        HomeViewController.score.text = "\(userTried) / \(Board.maxTry)"
     }
     
     // MARK: - Design

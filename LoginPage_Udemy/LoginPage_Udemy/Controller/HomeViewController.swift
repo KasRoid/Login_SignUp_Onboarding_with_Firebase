@@ -15,14 +15,13 @@ class HomeViewController: UIViewController {
     private var gameBoard = Board()
     static var score: UILabel = {
         let label = UILabel()
-        label.text = "0 / 30"
+        label.text = "0 / \(Board.maxTry)"
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 25)
         label.textColor = .white
         label.sizeToFit()
         return label
     }()
-    
     
     
     // MARK: - LifeCycle
@@ -86,6 +85,8 @@ class HomeViewController: UIViewController {
         
         
         // 여기서부터 복사
+        
+        
         [gameBoard, HomeViewController.score].forEach { view.addSubview($0) }
         [gameBoard, HomeViewController.score].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         let safeArea = view.safeAreaLayoutGuide
@@ -95,13 +96,9 @@ class HomeViewController: UIViewController {
             gameBoard.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -35),
             gameBoard.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 0),
             
-//            score.topAnchor.constraint(equalTo: view.topAnchor, constant: 99),
+            //            score.topAnchor.constraint(equalTo: view.topAnchor, constant: 99),
             HomeViewController.score.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: -(HomeViewController.score.frame.height * 1.4)),
             HomeViewController.score.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -30),
         ])
-    }
-    
-    @objc func resetButtonPressed(_ sender: UIButton) {
-        
     }
 }

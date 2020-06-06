@@ -12,6 +12,7 @@ final class Cards: UIButton {
     
     let label = UILabel()
     var isFlipped = false
+    let logoIamgeView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,10 +25,14 @@ final class Cards: UIButton {
         label.text = ""
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: sizeOfFontOnCards)
-                
+        
         addSubview(label)
         label.centerX(inView: self)
         label.centerY(inView: self)
+        
+        addSubview(logoIamgeView)
+        logoIamgeView.centerX(inView: self)
+        logoIamgeView.centerY(inView: self)
     }
     
     required init?(coder: NSCoder) {
