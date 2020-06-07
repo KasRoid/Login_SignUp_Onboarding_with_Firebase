@@ -36,7 +36,9 @@ class HomeViewController: UIViewController {
             return String(cardGameBrain.turnsLeftTillGameOver()) // 유저에게 몇 번의 기회가 남았는지를 돌려준다.
         }
         set {
+            print("Setting up Score...", newValue)
             score.titleLabel?.text = newValue // turn 레이블 업데이트
+            score.setTitle(newValue, for: .normal)
         }
     }
     private lazy var horizontalNumberOfLinesNeededToPlaceCards = cardGameBrain.numberOfLinesNeedToPlaceCards
@@ -71,7 +73,8 @@ class HomeViewController: UIViewController {
         let easyAlertAction = UIAlertAction(title: "쉬움", style: .default, handler: { _ in self.currentGameMode = .easy; self.restartGame() })
         let hardAlertAction = UIAlertAction(title: "어려움", style: .default, handler: { _ in self.currentGameMode = .hard; self.restartGame() })
         let expertAlertAction = UIAlertAction(title: "매우 어려움", style: .default, handler: { _ in self.currentGameMode = .expert; self.restartGame();})
-        [expertAlertAction, hardAlertAction, easyAlertAction].forEach { alert.addAction($0) }
+        let cancelAlertAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        [expertAlertAction, hardAlertAction, easyAlertAction, cancelAlertAction].forEach { alert.addAction($0) }
         present(alert, animated: true)
     }
     
