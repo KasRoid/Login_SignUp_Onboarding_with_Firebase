@@ -11,7 +11,7 @@ import Foundation
 enum GameModes {
     case easy
     case hard
-    case professional
+    case expert
     
     func chooseGameModes() -> Int {
         switch self {
@@ -19,7 +19,7 @@ enum GameModes {
             return 12
         case .hard:
             return 16
-        case .professional:
+        case .expert:
             return 20
         }
     }

@@ -14,14 +14,14 @@ class HomeViewController: UIViewController {
     // MARK: - Properties
     private var cardGameBrain = CardGameBrain()
     private var gameBoard = Board()
-    private lazy var score: UILabel = {
-        let label = UILabel()
-        label.text = cardGameBrain.turnsLeft
-        label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 25)
-        label.textColor = .white
-        label.sizeToFit()
-        return label
+    weak var delegate: HomeViewControllerDelegate?
+    private lazy var score: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(cardGameBrain.turnsLeft, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 28)
+        button.addTarget(self, action: #selector(handleScoreButton(_:)), for: .touchUpInside)
+        return button
     }()
     private lazy var resetButton: UIButton = {
         let button = UIButton(type: .system)
@@ -36,11 +36,11 @@ class HomeViewController: UIViewController {
             return String(cardGameBrain.turnsLeftTillGameOver()) // 유저에게 몇 번의 기회가 남았는지를 돌려준다.
         }
         set {
-            score.text = newValue // turn 업데이트용
+            score.titleLabel?.text = newValue // turn 레이블 업데이트
         }
     }
     private lazy var horizontalNumberOfLinesNeededToPlaceCards = cardGameBrain.numberOfLinesNeedToPlaceCards
-    weak var delegate: HomeViewControllerDelegate?
+    private var currentGameMode: GameModes = .expert // 유저가 선택한 게임모드를 저장
     
     
     // MARK: - LifeCycle
@@ -63,6 +63,15 @@ class HomeViewController: UIViewController {
             self.logout()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true)
+    }
+    
+    @objc func handleScoreButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: "난이도 변경", message: "원하는 난이도를 선택해주세요", preferredStyle: .actionSheet)
+        let easyAlertAction = UIAlertAction(title: "쉬움", style: .default, handler: { _ in self.currentGameMode = .easy; self.restartGame() })
+        let hardAlertAction = UIAlertAction(title: "어려움", style: .default, handler: { _ in self.currentGameMode = .hard; self.restartGame() })
+        let expertAlertAction = UIAlertAction(title: "매우 어려움", style: .default, handler: { _ in self.currentGameMode = .expert; self.restartGame();})
+        [expertAlertAction, hardAlertAction, easyAlertAction].forEach { alert.addAction($0) }
         present(alert, animated: true)
     }
     
@@ -123,7 +132,9 @@ class HomeViewController: UIViewController {
     
     // MARK: - Helpers
     func configureUI() {
+        sendDataToBoard()
         configureGradientBackground()
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.barStyle = .black
         navigationItem.title = "Card Nil"
@@ -133,16 +144,19 @@ class HomeViewController: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = .white
         
         
-        [gameBoard, score, resetButton].forEach { view.addSubview($0); $0.translatesAutoresizingMaskIntoConstraints = false }
         let safeArea = view.safeAreaLayoutGuide
+        let navigationBar = navigationController!.navigationBar
+        [gameBoard, resetButton].forEach { view.addSubview($0); $0.translatesAutoresizingMaskIntoConstraints = false }
+        navigationBar.addSubview(score)
+        score.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             gameBoard.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 55),
             gameBoard.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 35),
             gameBoard.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -35),
             gameBoard.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -85),
             
-            score.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: -(score.frame.height * 1.4)),
-            score.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -30),
+            score.bottomAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: -3),
+            score.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor, constant: -25),
             
             resetButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             resetButton.topAnchor.constraint(equalTo: gameBoard.bottomAnchor, constant: 30)
@@ -167,8 +181,6 @@ class HomeViewController: UIViewController {
                 break
             }
             while subview.arrangedSubviews.count < 4 {
-                print(cardGameBrain.numberOfLinesNeedToPlaceCards)
-                print(subviewCounter)
                 subview.addArrangedSubview(card[imageCounter])
                 card[imageCounter].addTarget(self, action: #selector(cardSelected(_:)), for: .touchUpInside)
                 imageCounter += 1
@@ -212,7 +224,7 @@ class HomeViewController: UIViewController {
     }
     
     private func restartGame() {
-        cardGameBrain = CardGameBrain()
+        cardGameBrain = CardGameBrain(gameMode: currentGameMode)
         gameBoard = Board()
         configureUI()
         initailizeCardGame()

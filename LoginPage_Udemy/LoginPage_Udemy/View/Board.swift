@@ -18,6 +18,7 @@ final class Board: UIView {
     let fifthLineStack = UIStackView()
     private var numberOfLinesNeedToCreate = 0
     lazy var arrayOfStackViews = [firstLineStack, secondLineStack, thirdLineStack, fourthLineStack, fifthLineStack]
+    let gameBoardStackView = UIStackView()
     
     
     // MARK: - LifeCycle
@@ -45,9 +46,7 @@ final class Board: UIView {
             $0.spacing = 13
         }
         
-        let gameBoardStackView = UIStackView(arrangedSubviews: [firstLineStack, secondLineStack, thirdLineStack, fourthLineStack, fifthLineStack])
         arrangeSubviewsToGameBoardStackView()
-        
         gameBoardStackView.axis = .vertical
         gameBoardStackView.alignment = .fill
         gameBoardStackView.distribution = .fillEqually
@@ -64,13 +63,14 @@ final class Board: UIView {
     }
     
     private func arrangeSubviewsToGameBoardStackView() {
-        
+        for line in 0..<numberOfLinesNeedToCreate {
+            gameBoardStackView.addArrangedSubview(arrayOfStackViews[line])
+        }
     }
 }
 
 extension Board: HomeViewControllerDelegate {
     func sendNumberOfLinesNeeded(lines: Int) {
-        
         numberOfLinesNeedToCreate = lines
     }
 }

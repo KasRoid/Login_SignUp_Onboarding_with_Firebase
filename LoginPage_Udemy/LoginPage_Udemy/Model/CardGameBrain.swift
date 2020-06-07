@@ -15,7 +15,7 @@ struct CardGameBrain {
     private var randomlySelectedImages: Set<String> = [] // 게임에 사용될 이미지를 난이도에 맞게 랜덤으로 할당받을 array
     var inGameCards: [Cards] = [] // 게임에서 사용될 카드들
     var numberOfClearedCards = 0 //
-    private let difficulty = GameModes.hard
+    var difficulty: GameModes
     private lazy var selectedDifficulty: Int = difficulty.chooseGameModes()
     private lazy var numberOfImagesToCreateCards = selectedDifficulty / 2
     lazy var numberOfLinesNeedToPlaceCards = inGameCards.count / 4
@@ -29,6 +29,16 @@ struct CardGameBrain {
     var imagesThatUserHasChosen: [String] = []
     private var flippedCardNumber: [Int] = []
     lazy var turnsLeft: String = "\(userHasTried) / \(gameOverCondition)"
+    
+    
+    // MARK: - Initailizers
+    init() {
+        difficulty = .expert
+    }
+    
+    init(gameMode: GameModes) {
+        difficulty = gameMode
+    }
     
     
     // MARK: - Methods
