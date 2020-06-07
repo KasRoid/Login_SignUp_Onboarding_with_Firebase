@@ -18,6 +18,8 @@
 		4225BE792487D9A000F4C11D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4225BE782487D9A000F4C11D /* HomeViewController.swift */; };
 		4225BE7B24888AED00F4C11D /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4225BE7A24888AED00F4C11D /* Cards.swift */; };
 		4225BE7D24888DAC00F4C11D /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4225BE7C24888DAC00F4C11D /* Board.swift */; };
+		423CDFCB248B8C2500428791 /* CardGameBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423CDFCA248B8C2500428791 /* CardGameBrain.swift */; };
+		423CDFCD248B915900428791 /* GameModes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423CDFCC248B915900428791 /* GameModes.swift */; };
 		42D5013B24871583003CC770 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D5013A24871583003CC770 /* AppDelegate.swift */; };
 		42D5014424871588003CC770 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42D5014324871588003CC770 /* Assets.xcassets */; };
 		42D5014724871588003CC770 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D5014524871588003CC770 /* LaunchScreen.storyboard */; };
@@ -38,6 +40,8 @@
 		4225BE782487D9A000F4C11D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4225BE7A24888AED00F4C11D /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 		4225BE7C24888DAC00F4C11D /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		423CDFCA248B8C2500428791 /* CardGameBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGameBrain.swift; sourceTree = "<group>"; };
+		423CDFCC248B915900428791 /* GameModes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModes.swift; sourceTree = "<group>"; };
 		42D5013724871583003CC770 /* LoginPage_Udemy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginPage_Udemy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D5013A24871583003CC770 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42D5014324871588003CC770 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 		42D5015124871826003CC770 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				423CDFCA248B8C2500428791 /* CardGameBrain.swift */,
+				423CDFCC248B915900428791 /* GameModes.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -134,10 +140,10 @@
 		42D5015424871854003CC770 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4225BE782487D9A000F4C11D /* HomeViewController.swift */,
 				42D5014E2487176C003CC770 /* LoginController.swift */,
 				4225BE7024878DB500F4C11D /* RegistrationController.swift */,
 				4225BE722487991900F4C11D /* ResetPasswordController.swift */,
-				4225BE782487D9A000F4C11D /* HomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -303,6 +309,7 @@
 				4225BE6B24873C0300F4C11D /* CustomTextField.swift in Sources */,
 				4225BE7D24888DAC00F4C11D /* Board.swift in Sources */,
 				4225BE732487991900F4C11D /* ResetPasswordController.swift in Sources */,
+				423CDFCD248B915900428791 /* GameModes.swift in Sources */,
 				4225BE6D24873F6400F4C11D /* AuthButton.swift in Sources */,
 				42D5013B24871583003CC770 /* AppDelegate.swift in Sources */,
 				4225BE7B24888AED00F4C11D /* Cards.swift in Sources */,
@@ -311,6 +318,7 @@
 				4225BE752487A7D300F4C11D /* AuthenticationViewModel.swift in Sources */,
 				4225BE6F248783A100F4C11D /* DividerView.swift in Sources */,
 				42D5014F2487176C003CC770 /* LoginController.swift in Sources */,
+				423CDFCB248B8C2500428791 /* CardGameBrain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

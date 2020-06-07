@@ -12,24 +12,47 @@ import Firebase
 class HomeViewController: UIViewController {
     
     // MARK: - Properties
+    private var cardGameBrain = CardGameBrain()
     private var gameBoard = Board()
-    static var score: UILabel = {
+    private lazy var score: UILabel = {
         let label = UILabel()
-        label.text = "0 / \(Board.maxTry)"
+        label.text = cardGameBrain.turnsLeft
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 25)
         label.textColor = .white
         label.sizeToFit()
         return label
     }()
+    private lazy var resetButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Reset", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(handleResetButton(_:)), for: .touchUpInside)
+        return button
+    }()
+    private var turnsLeft: String {
+        get {
+            return score.text ?? cardGameBrain.turnsLeft
+        }
+        set {
+            score.text = newValue
+        }
+    }
     
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         authenticateUser()
+        initailizeCardGame()
         configureUI()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     
     // MARK: - Selector
     @objc func handleLogout() {
@@ -40,6 +63,34 @@ class HomeViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true)
     }
+    
+    @objc func handleResetButton(_ sender: UIButton) {
+        cardGameBrain = CardGameBrain()
+        gameBoard = Board()
+        configureUI()
+        initailizeCardGame()
+        turnsLeft = updateTurns()
+    }
+    
+    @objc func cardSelected(_ card: Cards) {
+        cardGameBrain.flipCard(card)
+        guard cardGameBrain.countSelectedCards() == 2 else { print("Less than two card selected"); return } // 유저가 카드 2장을 오픈했다면...
+        var result = false
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + 0.10,
+            execute: {
+                result = self.cardGameBrain.checkAnswer()
+                self.turnsLeft = self.updateTurns()
+        })
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + 0.75,
+            execute: {
+                print("Excute Performed, number of cards: \(self.cardGameBrain.countSelectedCards()), number of images: \(self.cardGameBrain.imagesThatUserHasChosen)")
+                
+                result ? self.cardGameBrain.removeCardsFromTheBoard(self.gameBoard) : self.cardGameBrain.unflipCard(self.gameBoard)
+        })
+    }
+    
     
     // MARK: - API
     func logout() {
@@ -70,8 +121,8 @@ class HomeViewController: UIViewController {
         }
     }
     
-    // MARK: - Helpers
     
+    // MARK: - Helpers
     func configureUI() {
         configureGradientBackground()
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -83,22 +134,53 @@ class HomeViewController: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = .white
         
         
-        
-        // 여기서부터 복사
-        
-        
-        [gameBoard, HomeViewController.score].forEach { view.addSubview($0) }
-        [gameBoard, HomeViewController.score].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        [gameBoard, score, resetButton].forEach { view.addSubview($0); $0.translatesAutoresizingMaskIntoConstraints = false }
         let safeArea = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            gameBoard.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 40),
+            gameBoard.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 55),
             gameBoard.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 35),
             gameBoard.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -35),
-            gameBoard.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 0),
+            gameBoard.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -85),
             
-            //            score.topAnchor.constraint(equalTo: view.topAnchor, constant: 99),
-            HomeViewController.score.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: -(HomeViewController.score.frame.height * 1.4)),
-            HomeViewController.score.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -30),
+            score.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: -(score.frame.height * 1.4)),
+            score.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -30),
+            
+            resetButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            resetButton.topAnchor.constraint(equalTo: gameBoard.bottomAnchor, constant: 30)
         ])
+    }
+    
+    
+    // MARK: - Private Methods
+    private func initailizeCardGame() {
+        cardGameBrain.generateGameInfo()
+        arrangeCardsIntoSubviewsAndAddActions()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { self.unflipAllCards() })
+    }
+    
+    private func arrangeCardsIntoSubviewsAndAddActions() {
+        let card = cardGameBrain.inGameCards
+        var counter = 0
+        for subview in gameBoard.boardInStackView {
+            while subview.arrangedSubviews.count < 4 {
+                subview.addArrangedSubview(card[counter])
+                card[counter].addTarget(self, action: #selector(cardSelected(_:)), for: .touchUpInside)
+                counter += 1
+            }
+        }
+    }
+    
+    private func unflipAllCards() {
+        let parentStack = gameBoard.boardInStackView
+        for childStack in parentStack {
+            for view in childStack.subviews {
+                guard let card = view as? Cards else { return }
+                card.isFlipped = false
+            }
+        }
+    }
+    
+    private func updateTurns() -> String {
+        return cardGameBrain.turnsLeft
     }
 }
