@@ -33,12 +33,14 @@ class HomeViewController: UIViewController {
     }()
     private var turnsLeft: String {
         get {
-            return score.text ?? cardGameBrain.turnsLeft
+            return String(cardGameBrain.turnsLeftTillGameOver()) // 유저에게 몇 번의 기회가 남았는지를 돌려준다.
         }
         set {
-            score.text = newValue
+            score.text = newValue // turn 업데이트용
         }
     }
+    private lazy var horizontalNumberOfLinesNeededToPlaceCards = cardGameBrain.numberOfLinesNeedToPlaceCards
+    weak var delegate: HomeViewControllerDelegate?
     
     
     // MARK: - LifeCycle
@@ -65,11 +67,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func handleResetButton(_ sender: UIButton) {
-        cardGameBrain = CardGameBrain()
-        gameBoard = Board()
-        configureUI()
-        initailizeCardGame()
-        turnsLeft = updateTurns()
+        restartGame()
     }
     
     @objc func cardSelected(_ card: Cards) {
@@ -88,6 +86,7 @@ class HomeViewController: UIViewController {
                 print("Excute Performed, number of cards: \(self.cardGameBrain.countSelectedCards()), number of images: \(self.cardGameBrain.imagesThatUserHasChosen)")
                 
                 result ? self.cardGameBrain.removeCardsFromTheBoard(self.gameBoard) : self.cardGameBrain.unflipCard(self.gameBoard)
+                self.turnsLeft = self.updateTurns()
         })
     }
     
@@ -160,18 +159,25 @@ class HomeViewController: UIViewController {
     
     private func arrangeCardsIntoSubviewsAndAddActions() {
         let card = cardGameBrain.inGameCards
-        var counter = 0
-        for subview in gameBoard.boardInStackView {
+        var imageCounter = 0
+        var subviewCounter = 0
+        for subview in gameBoard.arrayOfStackViews {
+            subviewCounter += 1
+            if subviewCounter > cardGameBrain.numberOfLinesNeedToPlaceCards {
+                break
+            }
             while subview.arrangedSubviews.count < 4 {
-                subview.addArrangedSubview(card[counter])
-                card[counter].addTarget(self, action: #selector(cardSelected(_:)), for: .touchUpInside)
-                counter += 1
+                print(cardGameBrain.numberOfLinesNeedToPlaceCards)
+                print(subviewCounter)
+                subview.addArrangedSubview(card[imageCounter])
+                card[imageCounter].addTarget(self, action: #selector(cardSelected(_:)), for: .touchUpInside)
+                imageCounter += 1
             }
         }
     }
     
     private func unflipAllCards() {
-        let parentStack = gameBoard.boardInStackView
+        let parentStack = gameBoard.arrayOfStackViews
         for childStack in parentStack {
             for view in childStack.subviews {
                 guard let card = view as? Cards else { return }
@@ -181,6 +187,50 @@ class HomeViewController: UIViewController {
     }
     
     private func updateTurns() -> String {
+        guard cardGameBrain.gameCleared() == false else {
+            let alert = UIAlertController(title: "Game Clear", message: "축하합니다!!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(
+                title: "확인",
+                style: .cancel,
+                handler: {
+                    _ in self.restartGame()
+            }))
+            present(alert, animated: true)
+            return cardGameBrain.turnsLeft
+        }
+        guard cardGameBrain.gameOver() == false else {
+            let alert = UIAlertController(title: "Game Over", message: "다음에는 꼭 성공할 수 있을거에요!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(
+                title: "확인",
+                style: .cancel,
+                handler: {
+                    _ in self.restartGame()
+            }))
+            present(alert, animated: true)
+            return cardGameBrain.turnsLeft }
         return cardGameBrain.turnsLeft
     }
+    
+    private func restartGame() {
+        cardGameBrain = CardGameBrain()
+        gameBoard = Board()
+        configureUI()
+        initailizeCardGame()
+        turnsLeft = updateTurns()
+    }
+}
+
+
+// MARK: - Extension
+extension HomeViewController {
+    private func sendDataToBoard() {
+        self.delegate = gameBoard
+        self.delegate?.sendNumberOfLinesNeeded(lines: horizontalNumberOfLinesNeededToPlaceCards)
+    }
+}
+
+
+// MARK: - Delegate Protocol
+protocol HomeViewControllerDelegate: class {
+    func sendNumberOfLinesNeeded(lines: Int)
 }

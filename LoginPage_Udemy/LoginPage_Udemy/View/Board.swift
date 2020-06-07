@@ -15,7 +15,9 @@ final class Board: UIView {
     let secondLineStack = UIStackView()
     let thirdLineStack = UIStackView()
     let fourthLineStack = UIStackView()
-    lazy var boardInStackView = [firstLineStack, secondLineStack, thirdLineStack, fourthLineStack]
+    let fifthLineStack = UIStackView()
+    private var numberOfLinesNeedToCreate = 0
+    lazy var arrayOfStackViews = [firstLineStack, secondLineStack, thirdLineStack, fourthLineStack, fifthLineStack]
     
     
     // MARK: - LifeCycle
@@ -34,38 +36,41 @@ final class Board: UIView {
     }
     
     
-    // MARK: - Methods
-    func removeAllSubviews() {
-        for stack in boardInStackView {
-            for view in stack.subviews {
-                stack.removeArrangedSubview(view)
-            }
-        }
-    }
-
-    
-    // MARK: - Setup UI
-    func configureUI() {
-        boardInStackView.forEach {
+    // MARK: - UI
+    private func configureUI() {
+        arrayOfStackViews.forEach {
             $0.axis = .horizontal
             $0.alignment = .fill
             $0.distribution = .fillEqually
-            $0.spacing = 15
+            $0.spacing = 13
         }
         
-        let finalStack = UIStackView(arrangedSubviews: [firstLineStack, secondLineStack, thirdLineStack, fourthLineStack])
-        finalStack.axis = .vertical
-        finalStack.alignment = .fill
-        finalStack.distribution = .fillEqually
-        finalStack.spacing = 25
+        let gameBoardStackView = UIStackView(arrangedSubviews: [firstLineStack, secondLineStack, thirdLineStack, fourthLineStack, fifthLineStack])
+        arrangeSubviewsToGameBoardStackView()
         
-        addSubview(finalStack)
-        finalStack.translatesAutoresizingMaskIntoConstraints = false
+        gameBoardStackView.axis = .vertical
+        gameBoardStackView.alignment = .fill
+        gameBoardStackView.distribution = .fillEqually
+        gameBoardStackView.spacing = 18
+        
+        addSubview(gameBoardStackView)
+        gameBoardStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            finalStack.topAnchor.constraint(equalTo: topAnchor),
-            finalStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            finalStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            finalStack.bottomAnchor.constraint(equalTo: bottomAnchor)
+            gameBoardStackView.topAnchor.constraint(equalTo: topAnchor),
+            gameBoardStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            gameBoardStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            gameBoardStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+    
+    private func arrangeSubviewsToGameBoardStackView() {
+        
+    }
+}
+
+extension Board: HomeViewControllerDelegate {
+    func sendNumberOfLinesNeeded(lines: Int) {
+        
+        numberOfLinesNeedToCreate = lines
     }
 }

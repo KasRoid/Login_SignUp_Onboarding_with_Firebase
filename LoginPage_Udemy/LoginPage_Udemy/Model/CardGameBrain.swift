@@ -11,12 +11,14 @@ import Foundation
 struct CardGameBrain {
     
     // MARK: - Properties
-    private let cardImages: [String] = ["😍", "🐸", "🍎", "⚽️", "🍔", "🍟", "👻", "💋","🐶","🍋"]
-    private var randomlySelectedImages: Set<String> = [] // 게임에 사용될 이미지 8개를 랜덤으로 할당받을 array
+    private let cardImages: [String] = ["😍", "🐸", "🍎", "⚽️", "🍔", "🍟", "👻", "💋","🐶","🍋","🥑","🥦","🥨","🧀","🍖","🌯","🌮","🥘","🍣","🍱","🏓","🪀","🏹","🛩","🐣","🦄","🔥"]
+    private var randomlySelectedImages: Set<String> = [] // 게임에 사용될 이미지를 난이도에 맞게 랜덤으로 할당받을 array
     var inGameCards: [Cards] = [] // 게임에서 사용될 카드들
+    var numberOfClearedCards = 0 //
     private let difficulty = GameModes.hard
     private lazy var selectedDifficulty: Int = difficulty.chooseGameModes()
     private lazy var numberOfImagesToCreateCards = selectedDifficulty / 2
+    lazy var numberOfLinesNeedToPlaceCards = inGameCards.count / 4
     private let gameOverCondition = 20
     private var userHasTried: Int = 0 {
         didSet {
@@ -32,6 +34,7 @@ struct CardGameBrain {
     // MARK: - Methods
     mutating func generateGameInfo() {
         generateCardsWithImage()
+        print("Number of Images: \(inGameCards.count)")
     }
 
     
@@ -45,7 +48,7 @@ struct CardGameBrain {
         guard countSelectedCards() == 2 else { print("DEBUG: func unflipCard Guard"); return }
         let firstCardNumber = flippedCardNumber[0]
         let secondCardNumber = flippedCardNumber[1]
-        let parentStack = board.boardInStackView
+        let parentStack = board.arrayOfStackViews
         for childStack in parentStack {
             for view in childStack.subviews {
                 guard let card = view as? Cards else { return }
@@ -61,7 +64,7 @@ struct CardGameBrain {
         guard countSelectedCards() == 2 else { print("DEBUG: func removeCardsFromTheBoard Guard"); return }
         let firstCardNumber = flippedCardNumber[0]
         let secondCardNumber = flippedCardNumber[1]
-        let parentStack = board.boardInStackView
+        let parentStack = board.arrayOfStackViews
         for childStack in parentStack {
             for view in childStack.subviews {
                 guard let card = view as? Cards else { return }
@@ -70,6 +73,7 @@ struct CardGameBrain {
                 }
             }
         }
+        numberOfClearedCards += 1
         deleteUsersChoice()
     }
     
@@ -91,6 +95,17 @@ struct CardGameBrain {
         userHasTried = 0
     }
     
+    func turnsLeftTillGameOver() -> Int {
+        return gameOverCondition - userHasTried
+    }
+    
+    func gameCleared() -> Bool {
+        return numberOfClearedCards >= randomlySelectedImages.count
+    }
+    
+    func gameOver() -> Bool {
+        return userHasTried >= gameOverCondition
+    }
     
     
     // MARK: - Private Methods
@@ -128,9 +143,5 @@ struct CardGameBrain {
     private mutating func deleteUsersChoice() {
         flippedCardNumber.removeAll()
         imagesThatUserHasChosen.removeAll()
-    }
-    
-    private func gameOver() {
-        
     }
 }
