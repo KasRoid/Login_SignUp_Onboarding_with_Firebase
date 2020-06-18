@@ -52,11 +52,7 @@ class HomeViewController: UIViewController {
         initailizeCardGame()
         configureUI()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
+
     
     // MARK: - Selector
     @objc func handleLogout() {

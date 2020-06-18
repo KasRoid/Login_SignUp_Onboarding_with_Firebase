@@ -69,6 +69,7 @@ final class Board: UIView {
     }
 }
 
+// MARK: - Extensions
 extension Board: HomeViewControllerDelegate {
     func sendNumberOfLinesNeeded(lines: Int) {
         numberOfLinesNeedToCreate = lines

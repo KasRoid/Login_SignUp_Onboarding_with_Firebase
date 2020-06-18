@@ -120,7 +120,6 @@ struct CardGameBrain {
     
     // MARK: - Private Methods
     private func checkModes() {
-        
     }
     
     private mutating func chooseCardImagesFromImageList() {
